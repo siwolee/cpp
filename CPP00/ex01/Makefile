@@ -3,35 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
+#    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/09/25 17:23:14 by siwolee          ###   ########.fr        #
+#    Updated: 2023/09/25 21:21:52 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = phonebook
 
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 # -g3 #-fsanitize=address
 RM = rm -f
 
-SRCS = megaphone.cpp
+SRCS = phonebook.cpp
 
-OBJS = $(SRC:.cpp=.o)
-
-# HEADER = -I./header
 
 all : 		$(NAME)
 
 $(NAME) :	$(SRCS) 
-			@echo $(SRCS)
+			@echo $(SRCS) 
 			@$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 			@echo "🌹ALL compiled"
-clean :
-			# @make -sC ./libft fclean
-			# @$(RM) $(OBJS)
-			@echo "💔nothing to be cleaned"
 
 fclean :	
 			@rm -rf miniRT.dSYM
@@ -40,5 +33,5 @@ fclean :
 
 re :		fclean all
 
-.PHONY : all clean fclean re bonus
+.PHONY : all fclean re
 
