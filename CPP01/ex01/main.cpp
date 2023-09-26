@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 15:45:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 19:51:00 by siwolee          ###   ########.fr       */
+/*   Created: 2023/09/26 20:11:39 by siwolee           #+#    #+#             */
+/*   Updated: 2023/09/26 20:11:39 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	Zombie::announce(void){
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ...\n";
-};
+void	leaks()
+{
+	system("leaks zombie");
+}
 
-Zombie::~Zombie(){
-	std::cout << this->name << ": is deleted\n";
-};
+int main()
+{
+	// atexit(leaks);
+	Zombie* horde;
 
-Zombie::Zombie(){};
+	horde = zombieHorde(4, "newbie");
 
-Zombie::Zombie(std::string name){
-	this->name = name;
+	for (int i = 0; i < 4; i++){
+		horde[i].announce();
+	}
+	delete[] horde;
+	return (0);
 }

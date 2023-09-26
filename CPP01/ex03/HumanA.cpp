@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 15:45:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 19:51:00 by siwolee          ###   ########.fr       */
+/*   Created: 2023/09/26 20:12:08 by siwolee           #+#    #+#             */
+/*   Updated: 2023/09/26 20:53:28 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanA.hpp"
 
-void	Zombie::announce(void){
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ...\n";
-};
+void	HumanA::attack(){
+	std::cout << this->name << " attacks with their " \
+		<< this->wp.getType() << "\n";
+}
 
-Zombie::~Zombie(){
-	std::cout << this->name << ": is deleted\n";
-};
-
-Zombie::Zombie(){};
-
-Zombie::Zombie(std::string name){
+HumanA::HumanA(std::string name, Weapon &wp): wp(wp){
 	this->name = name;
 }
+
+

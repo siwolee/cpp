@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 17:47:29 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 19:51:10 by siwolee          ###   ########.fr       */
+/*   Created: 2023/09/26 21:56:45 by siwolee           #+#    #+#             */
+/*   Updated: 2023/09/26 22:27:32 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #include <iostream>
 
-class Zombie{
+class Harl{
 	private:
-		std::string	name;
+		void debug( void );
+		void info( void );
+		void warning( void );
+		void error( void );
 	public:
-		void	announce(void);
-		void	ramdomChump(std::string name);
-		Zombie();
-		Zombie(std::string name);
-		~Zombie();
+		Harl();
+		void complain(std::string level);
 };
 
-Zombie*	newZombie(std::string name);
+void Harl::complain(std::string level){
+	void (Harl::*func[4])(void) = {
+		Harl::debug, 
+		Harl::info, 
+		Harl::warning, 
+		Harl::error
+	};
+
+	std::string const command[4] = {
+		"DEBUG", "INFO", "WARNING", "ERROR"
+	};
+
+	for (int i = 0; i < 4; i++){
+		if (command[i] == level)
+			this->(func[i])();
+	}
+}

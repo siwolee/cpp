@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 15:45:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 19:51:00 by siwolee          ###   ########.fr       */
+/*   Created: 2023/09/26 17:47:29 by siwolee           #+#    #+#             */
+/*   Updated: 2023/09/26 19:49:36 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#include <iostream>
 
-void	Zombie::announce(void){
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ...\n";
+class Zombie{
+	private:
+		std::string	name;
+	public:
+		void	announce(void);
+		void	ramdomChump(std::string name);
+		void	newname(std::string name);
+		Zombie(std::string name);
+		Zombie();
+		~Zombie();
 };
 
-Zombie::~Zombie(){
-	std::cout << this->name << ": is deleted\n";
-};
-
-Zombie::Zombie(){};
-
-Zombie::Zombie(std::string name){
-	this->name = name;
-}
+Zombie*	newZombie(std::string name);
+Zombie*	zombieHorde(int N, std::string name);

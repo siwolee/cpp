@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 15:45:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 19:51:00 by siwolee          ###   ########.fr       */
+/*   Created: 2023/09/26 20:12:08 by siwolee           #+#    #+#             */
+/*   Updated: 2023/09/26 20:56:24 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Weapon.hpp"
 
-void	Zombie::announce(void){
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ...\n";
+class	HumanB{
+	private:
+		Weapon*	wp;
+		std::string name;
+	public:
+		HumanB(std::string name);
+		void	attack();
+		void	setWeapon(Weapon& wp);
 };
 
-Zombie::~Zombie(){
-	std::cout << this->name << ": is deleted\n";
-};
-
-Zombie::Zombie(){};
-
-Zombie::Zombie(std::string name){
-	this->name = name;
-}
