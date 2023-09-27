@@ -1,10 +1,9 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/siwolee/cpp-1'
+make: Leaving directory `/Users/siwolee/cpp-1'
  
 make: *** No rule to make target `main.cpp', needed by `ex03'.
 make: *** No rule to make target `HumanA.cpp', needed by `ex03'.
 make: *** No rule to make target `HumanB.cpp', needed by `ex03'.
 make: *** No rule to make target `Weapon.cpp', needed by `ex03'.
 
-make: Leaving directory `/Users/siwolee/cpp-1'
- 

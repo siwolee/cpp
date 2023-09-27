@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
+#    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/09/25 17:23:14 by siwolee          ###   ########.fr        #
+#    Updated: 2023/09/27 16:09:06 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
 CXX = clang++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 # -g3 #-fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
 RM = rm -f
 
 SRCS = megaphone.cpp
@@ -29,8 +29,7 @@ $(NAME) :	$(SRCS)
 			@$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 			@echo "🌹ALL compiled"
 clean :
-			# @make -sC ./libft fclean
-			# @$(RM) $(OBJS)
+			@$(RM) $(NAME)
 			@echo "💔nothing to be cleaned"
 
 fclean :	
@@ -40,5 +39,5 @@ fclean :
 
 re :		fclean all
 
-.PHONY : all clean fclean re bonus
+.PHONY : all clean fclean re 
 
