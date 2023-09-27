@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:33:43 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/25 21:41:45 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/09/25 21:44:09 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 	// static int	getNbDeposits( void );
 	// static int	getNbWithdrawals( void );
 	// static void	displayAccountsInfos( void );
-
-Account(int initial_deposit){
-	this->_nbAccounts += 1;
-	this->_totalAmount += ini
-	this->
-}
 
 
 void Account::makeDeposit(int deposit){

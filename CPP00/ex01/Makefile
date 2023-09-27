@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/09/25 21:21:52 by siwolee          ###   ########.fr        #
+#    Created: 2023/04/15 17:53:40 by siwolee           #+#    #+#              #
+#    Updated: 2023/09/25 22:08:17 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX = clang++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 # -g3 #-fsanitize=address
 RM = rm -f
 
-SRCS = phonebook.cpp
+SRCS = main.cpp phonebook.cpp Contact.cpp
 
 
 all : 		$(NAME)

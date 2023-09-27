@@ -6,36 +6,36 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:49:14 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/25 21:24:10 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/09/25 22:07:20 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
-int main()
-{
+void	PhoneBook::search(void) {
 	std::string	command;
-	PhoneBook	pb;
 
-	while (1)
-	{
-		std::cout<<"---This is so PhoneBook---\n";
-		std::cin>>command;
-		if (command.compare("add") == 0)
-		{
-			pb.add();
-		}
-		else if (command.compare("search") == 0)
-		{
-			pb.search();
-		}
-		else if (command.compare("exit") == 0)
-		{
-			std::cout << "exit phonebook\n";
-			break;
-		}
+	if (this->total == 0){
+		std::cout << "phonebook is empty\n";
+		return ;
 	}
-	return (0);
-}
+	for (int i = 0; i < total && i < 8; i++){
+		(this->book)[i].display_less(i + 1);
+	}
+	std::cin >> command;
+	if (command.length() == 1 && command[0] >= '1' && command[0] <= '8'){
+		this->book[command[0] - '1'].display_all();
+	}
+};
+
+void	PhoneBook::add(void){
+	std::string	command;
+	int idx;
+	
+	idx = (this->total) % 8 ;
+	this->book[idx].add();
+	this->total += 1;
+};
+
+
 
