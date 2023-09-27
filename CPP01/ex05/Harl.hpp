@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:56:45 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/26 22:27:32 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:23:52 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void Harl::complain(std::string level){
 
 	for (int i = 0; i < 4; i++){
 		if (command[i] == level)
-			this->(func[i])();
+			func[i]();
 	}
 }
