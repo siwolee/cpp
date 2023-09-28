@@ -6,32 +6,26 @@
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/09/28 16:30:40 by siwolee          ###   ########.fr        #
+#    Updated: 2023/09/28 17:04:57 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = ex
 
 CXX = clang++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 #-fsanitize=address
 RM = rm -f
 
-SRCS = megaphone.cpp
+SRCS = main.cpp
 
-OBJS = $(SRC:.cpp=.o)
-
-# HEADER = -I./header
 
 all : 		$(NAME)
 
 $(NAME) :	$(SRCS) 
-			@echo $(SRCS)
+			@echo $(SRCS) 
 			@$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 			@echo "🌹ALL compiled"
-clean :
-			@$(RM) $(NAME)
-			@echo "💔nothing to be cleaned"
-
+ 
 fclean :	
 			@rm -rf miniRT.dSYM
 			@$(RM) $(NAME)
@@ -39,5 +33,5 @@ fclean :
 
 re :		fclean all
 
-.PHONY : all clean fclean re 
+.PHONY : all fclean re
 
