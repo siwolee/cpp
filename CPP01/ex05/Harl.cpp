@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:57:54 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/27 17:48:01 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/09/30 11:13:32 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void Harl::error( void ) {
 }
 
 void Harl::complain(std::string level){
+	int i;
 	void (Harl::*func[4])(void) = {
 			&Harl::debug, 
 			&Harl::info, 
@@ -39,8 +40,10 @@ void Harl::complain(std::string level){
 		"DEBUG", "INFO", "WARNING", "ERROR"
 	};
 
-	for (int i = 0; i < 4; i++){
+	for (i = 0; i < 4; i++){
 		if (command[i] == level)
-			(this->*func[i])();
+			return ((this->*func[i])());
 	}
+	if (i == 4)
+		std::cout << "That's not harl's command. Try again.\n";
 }

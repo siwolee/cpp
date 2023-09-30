@@ -19,7 +19,7 @@ int	main()
 	std::cout << std::setw(30) << "value of the pointer is :";
 	std::cout << *stringPTR << "\n";
 	std::cout << std::setw(30) << "value of the reference is :";
-	std::cout << stringREF << "\n";
+	std::cout << stringREF << "\n\n";
 
 	return (0);
 }
