@@ -7,10 +7,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `main.cpp', needed by `ex03'.  Stop.
 
-
-# Make data base, printed on Sat Sep 30 11:11:27 2023
+# Make data base, printed on Wed Oct  4 19:14:52 2023
 
 # Variables
 
@@ -32,6 +30,7 @@ CURDIR := /Users/siwolee/cpp-1
 SHELL = /bin/sh
 # makefile (from `Makefile', line 17)
 RM = rm -f
+ 
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en","availableLanguages":{},"_languagePackSupport":true}
 # environment
@@ -40,6 +39,8 @@ _ = /usr/bin/make
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 16)
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+# makefile (from `Makefile', line 20)
+OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
@@ -53,7 +54,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.sMGRwrCLfO/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CyiQqloWz5/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -83,7 +84,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from `Makefile', line 19)
-SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRCS = 
 # environment
 SHLVL = 1
 # default
@@ -93,13 +94,15 @@ USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 13)
-NAME = ex03
+NAME = ex
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 21)
+INC = $(SRCS:.c=.h)
 # default
 .VARIABLES := 
 # environment
@@ -117,9 +120,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2300
+XPC_SERVICE_NAME = com.microsoft.VSCode.4316
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -147,9 +152,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 157
+VSCODE_PID = 74685
 # variable set hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=2/94=2%
+# Load=70/1024=7%, Rehash=0, Collisions=5/110=5%
 
 # Pattern-specific Variable Values
 
@@ -157,26 +162,32 @@ VSCODE_PID = 157
 
 # Directories
 
-# . (device 16777225, inode 2300155): 11 files, no impossibilities.
+# . (device 16777225, inode 2300155): 13 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+%.o: %.c
+#  commands to execute (from `Makefile', line 31):
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
-all: ex03
+all: ex
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 
-.PHONY: all fclean re
+.PHONY: all clean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -190,76 +201,67 @@ all: ex03
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-09-27 14:26:50
+#  Last modified 2023-10-04 19:14:05
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-HumanA.cpp:
+ex:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-main.cpp:
-#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `'
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := ex
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-fclean:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
-	@rm -rf miniRT.dSYM
-	@$(RM) $(NAME)
-	@echo "💔cleaned everything"
+# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
+#  commands to execute (from `Makefile', line 26):
+	@echo $(SRCS) 
+	@$(CXX) $(CXXFLAGS) main.cpp $(OBJS) -o $(NAME)
+	@echo "🌹ALL compiled"
 	
-
-# Not a target:
-HumanB.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
-re: fclean all
+re: clean all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
 
-# Not a target:
-Weapon.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-ex03: main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 25):
-	@echo $(SRCS) 
-	@$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
-	@echo "🌹ALL compiled"
+#  commands to execute (from `Makefile', line 34):
+	@rm -rf miniRT.dSYM
+	@$(RM) $(NAME)
+	@echo "💔cleaned everything"
 	
 
 # files hash-table stats:
-# Load=12/1024=1%, Rehash=0, Collisions=0/35=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/28=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -271,6 +273,6 @@ ex03: main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Sep 30 11:11:27 2023
+# Finished Make data base on Wed Oct  4 19:14:53 2023
 
  

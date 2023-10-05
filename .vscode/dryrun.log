@@ -1,9 +1,7 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/siwolee/cpp-1'
+echo  
+clang++ -Wall -Wextra -Werror -std=c++98  main.cpp  -o ex
+echo "🌹ALL compiled"
 make: Leaving directory `/Users/siwolee/cpp-1'
  
-make: *** No rule to make target `main.cpp', needed by `ex03'.
-make: *** No rule to make target `HumanA.cpp', needed by `ex03'.
-make: *** No rule to make target `HumanB.cpp', needed by `ex03'.
-make: *** No rule to make target `Weapon.cpp', needed by `ex03'.
-

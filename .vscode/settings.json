@@ -63,6 +63,11 @@
 		"iomanip": "cpp",
 		"deque": "cpp",
 		"fstream": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"__functional_03": "cpp",
+		"filesystem": "cpp",
+		"animal.hpp": "c",
+		"dog.hpp": "c",
+		"cat.hpp": "c"
 	}
 }

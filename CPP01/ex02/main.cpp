@@ -3,8 +3,8 @@
 
 int	main()
 {
-	std::string	hi = "HI THIS IS BRAIN";
 	std::string* stringPTR = &hi;
+	std::string	hi = "HI THIS IS BRAIN";
 	std::string& stringREF = hi;
 	
 	std::cout << std::setw(30) << "address of the variable is :";

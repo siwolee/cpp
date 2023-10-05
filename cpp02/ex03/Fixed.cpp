@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 11:22:17 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/30 18:09:28 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/03 13:30:02 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,52 +51,20 @@ Fixed::Fixed(int const num)
 
 int		floatToFixed(float const num)
 {
-	int a;
-	int b;
-	float fnum;
-
-	a = static_cast<int>(num) << 8;
-	fnum = num - static_cast<int>(num);
-	b = 0;
-	for (int i = 0; i < 8; i++)
-	{
-		fnum *= 2.0;
-		if (fnum > 1.0)
-		{
-			fnum -= 1.0;
-			b += (1 << (8 - i - 1));
-		
-		}
-	}
-	return ((a + b));
+	return ((roundf(num * (float)(1 << 8))));
 }
 
 Fixed::Fixed(float const num)
 {
-	this->setRawBits(floatToFixed(num));
+	this->setRawBits(roundf(num * (1 << this->bits)));
 }
 
 float	Fixed::tofloat(void) const{
-	int		a;
-	float	b = 0.0;
-	int		fnum;
-	float	exp = 1;
-
-	a = (this->getRawBits()) >> 8;
-	fnum = (this->getRawBits() ) - (a<<8);
-	for (int i = 0; i < 8; i++)
-	{
-		exp /= 2.0;
-		if (fnum & 128)
-		{
-			b += exp;
-		}
-		fnum = fnum << 1;
-	}
-	return (((float)a + b));
+	return (this->getRawBits() / (float)(1 << this->bits));
 }
+
 int		Fixed::toInt(void) const{
-	return ((this->getRawBits()) >> 8);
+	return ((roundf(this->getRawBits() / (float)(1 << this->bits))));
 }
 
 bool Fixed::operator > (const Fixed& obj){
@@ -121,12 +89,12 @@ bool Fixed::operator != (const Fixed& obj){
 //arithmetic
 Fixed & Fixed::operator + (const Fixed& obj){
 	Fixed *temp = new Fixed();
-	temp->setRawBits(floatToFixed(this->tofloat() + obj.tofloat()));
+	temp->setRawBits(this->getRawBits() + obj.getRawBits());
 	return (*temp);
 }
 Fixed & Fixed::operator - (const Fixed& obj){
 	Fixed *temp = new Fixed();
-	temp->setRawBits(floatToFixed(this->tofloat() - obj.tofloat()));
+	temp->setRawBits(this->getRawBits() - obj.getRawBits());
 	return (*temp);
 }
 Fixed & Fixed::operator * (const Fixed& obj){

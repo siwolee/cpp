@@ -6,12 +6,13 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 11:21:53 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/30 13:24:29 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/03 12:24:57 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
+#include <cmath>
 
 class Fixed {
 	private:

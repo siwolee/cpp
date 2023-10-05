@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:42:05 by siwolee           #+#    #+#             */
-/*   Updated: 2023/09/30 18:12:44 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/03 13:29:06 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main( void ) {
 	Fixed a;
-	Fixed const b( 10 );
+	Fixed b( 10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 	Fixed temp(-1);
@@ -40,10 +40,6 @@ int main( void ) {
 	std::cout << a << " * " << b << " is " << (a * b) << "\n";
 	std::cout << a << " / " << b << " is " << (a / b) << "\n";
 	std::cout << a << " * " << temp << " is " << (a * temp) << "\n";
-
-	std::cout << "\n=prefix postfix=============\n";
-	std::cout << a << " ++ is " << ++a << "\n";
-	std::cout << " ++" << a  << " is "<< a++ << "\n";
 
 	std::cout << "\n=example====================\n";
 	Fixed aa = Fixed();
