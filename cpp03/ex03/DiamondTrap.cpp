@@ -43,7 +43,7 @@ DiamondTrap & DiamondTrap::operator=(const DiamondTrap & obj){
 };
 
 void	DiamondTrap::attack(const std::string& target){
-	FragTrap::attack(target);
+	ScavTrap::attack(target);
 };
                                                              
 void	DiamondTrap::takeDamage(unsigned int amount){
