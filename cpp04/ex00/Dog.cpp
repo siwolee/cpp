@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:28:19 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/05 19:46:43 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:35:19 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ Dog & Dog::operator=(const Dog & assign)
 	return *this;
 }
 
-void	Dog::makeSound(){
-	std::cout << this->type << ": .......BowWow\n" << std::endl;
+void	Dog::makeSound() const{
+	std::cout << this->type << ": .......BowWow" << std::endl;
 };
 
-std::string	Dog::getType(){
+std::string	Dog::getType() const{
 	return (this->type);
 };

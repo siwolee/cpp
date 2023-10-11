@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:28:19 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/05 19:47:06 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:35:15 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ Cat & Cat::operator=(const Cat & assign)
 	return *this;
 }
 
-void	Cat::makeSound(){
-	std::cout << this->type << ": .......BowWow\n" << std::endl;
+void	Cat::makeSound() const {
+	std::cout << this->type << ": .......Meow Meow" << std::endl;
 };
 
-std::string	Cat::getType(){
+std::string	Cat::getType() const{
 	return (this->type);
 };

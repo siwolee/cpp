@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/10/05 19:52:47 by siwolee          ###   ########.fr        #
+#    Updated: 2023/10/10 16:02:37 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX = clang++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 #-fsanitize=address
 RM = rm -f
 
-SRCS = Animal.cpp Dog.cpp Cat.cpp
+SRCS = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS = $(SRCS:.cpp=.o) main.o
 INC = $(SRCS:.cpp=.hpp)
 
@@ -24,18 +24,21 @@ all : 		$(NAME)
 
 $(NAME) :	$(OBJS) $(INC)
 			@echo $(SRCS) 
-			@$(CXX) $(CXXFLAGS) main.o $(OBJS) -o $(NAME)
+			@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 			@echo "🌹ALL compiled"
 
 %.o : %.c $(INC)
 			@$(CXX) $(CXXFLAGS) -c $< -o $@
  
 clean :	
-			@rm -rf miniRT.dSYM
+			@rm -rf $(OBJS) miniRT.dSYM
+			@echo "💔cleaned OBJS"
+
+fclean :	clean
 			@$(RM) $(NAME)
 			@echo "💔cleaned everything"
 
-re :		clean all
+re :		fclean all
 
-.PHONY : all clean re
+.PHONY : all clean re fclean
 

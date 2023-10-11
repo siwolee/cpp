@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:28:19 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/05 19:46:48 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/09 21:10:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ class Dog : virtual public Animal {
 		Dog(const Dog & copy);
 		~Dog();
 		Dog& operator=(const Dog & assign);
-		void	makeSound();
-		std::string	getType();
+		void	makeSound() const;
+		std::string	getType() const;
 };
