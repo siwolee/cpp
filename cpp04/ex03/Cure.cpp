@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:57:37 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/10 21:25:57 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/11 18:50:33 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure(): type("cure"){
+Cure::Cure(): AMateria("cure"){
 
 };
 

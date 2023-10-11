@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:26:16 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/10 16:46:05 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:19:35 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 #include "Dog.hpp"
+void leaks()
+{
+	system("leaks ex");
+}
 
 int main()
 {
+	// atexit(leaks);
+	{
 	IAnimal *meta[4];
 	meta[0] = new Dog();
 	meta[1] = new Dog(); 
@@ -38,5 +44,6 @@ int main()
 	
 	kitty.makeSound();
 	kittycopy.makeSound();
+	}
 	return 0;
 };

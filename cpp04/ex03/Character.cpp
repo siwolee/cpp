@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:23:12 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/10 21:44:39 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:02:54 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ void Character::unequip(int idx){
 };
 
 void Character::use(int idx, ICharacter& target){
+	if (this->inventory[idx] == NULL)
+		return ;
 	this->inventory[idx]->use(target);
 };

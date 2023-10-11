@@ -14,7 +14,6 @@
 
 class WrongCat : virtual public WrongAnimal {
 	private:
-		std::string type;
 	public:
 		WrongCat();
 		WrongCat(std::string _type);

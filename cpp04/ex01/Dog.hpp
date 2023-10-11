@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:28:19 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/10 16:02:38 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:07:04 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 class Dog : virtual public Animal {
 	private:
-		std::string type;
 		Brain * brain;
 	public:
 		Dog();

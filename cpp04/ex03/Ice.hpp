@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:14:23 by siwolee           #+#    #+#             */
-/*   Updated: 2023/10/10 21:32:48 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/10/11 18:49:53 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 class Ice : virtual public AMateria 
 {
 	private:
-		std::string type;
 	public:
 		Ice();
 		Ice(const Ice & copy);
