@@ -6,6 +6,35 @@ Form::~Form(){};
 
 Form::Form(std::string _name): name(_name), isSigned(false), signGrade(150), execGrade(150){};
 
+Form::Form(std::string _name, int _signGrade, int _execGrade): name(_name){
+try	{
+	if (_signGrade < 1 || _execGrade < 1)
+		throw Form::GradeTooHighException();
+	if (_signGrade > 150 || _execGrade > 150)
+		throw Form::GradeTooLowException();
+}
+catch (std::exception & e){
+	std::cout << e.what() << ": intialize to available value" <<std::endl;
+}	
+	isSigned = false;
+	if (_signGrade > 150)
+		signGrade = 150;
+	else 
+		signGrade = _signGrade;
+	if (_execGrade > 150)
+		execGrade =  150;
+	else 
+		execGrade = _execGrade;
+	if (_signGrade < 1)
+		signGrade = 1;
+	else 
+		signGrade = _signGrade;
+	if (_execGrade < 1)
+		execGrade = 1;
+	else 
+		execGrade = _execGrade;
+}
+
 Form & Form::operator=(const Form & assign){
 	if (this == &assign)
 		return (*this);
