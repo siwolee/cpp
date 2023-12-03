@@ -1,12 +1,7 @@
 #include "Bureaucrat.hpp"
 
 void 	Bureaucrat::executeForm(const AForm & form){
-	try{
-		form.execute(*this);
-	}
-	catch (AForm::GradeTooLowException & e) {
-		std::cout << name << " cannot execute " << form.getName() << " because " << e.what() << std::endl;
-	}
+	form.execute(*this);
 }
 
 void	Bureaucrat::signForm(AForm *form){
@@ -18,7 +13,7 @@ void	Bureaucrat::signForm(AForm *form){
 		form->beSigned(*this);
 	}
 	catch (AForm::GradeTooLowException & e) {
-		std::cout << name << " cannot sign " << form->getName() << " because his grade is too low" << std::endl;
+		std::cerr << name << " cannot sign " << form->getName() << " because his grade is too low" << std::endl;
 		return ;
 	}
 	std::cout << name << " signs " << form->getName() << std::endl;

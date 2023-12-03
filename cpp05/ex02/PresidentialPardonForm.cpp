@@ -1,17 +1,13 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm") {
-	signGrade = 25;
-	execGrade = 5;
+PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5) {
 	target = "president";
 };
 
 PresidentialPardonForm::~PresidentialPardonForm(){};
 
-PresidentialPardonForm::PresidentialPardonForm(std::string _target): AForm("PresidentialPardonForm"){
+PresidentialPardonForm::PresidentialPardonForm(std::string _target): AForm("PresidentialPardonForm", 25, 5){
 	target = _target;
-	signGrade = 25;
-	execGrade = 5;
 }
 
 PresidentialPardonForm & PresidentialPardonForm::operator=(const PresidentialPardonForm & assign){
@@ -25,10 +21,20 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm & co
 }
 
 void	PresidentialPardonForm::execute(Bureaucrat const & executor) const{
-	if (executor.getGrade() > execGrade)
-		throw AForm::GradeTooLowException();
-	std::cout << "Information :: "<< target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
-	std::cout << "RobotomyRequestForm has been executed by " << executor.getName() << std::endl;
+	std::cout << BOLDYELLOW << std::setw(20) << std::left << "PresidentialPardon" << RESET << "|";
+	std::cout << BOLDYELLOW  << std::setw(10) << std::left << executor.getName() << RESET << "|";
+	std::cout << BOLDYELLOW  << std::setw(10) << std::left << target << RESET << "|";
+	try {
+		if (executor.getGrade() > execGrade)
+			throw AForm::GradeTooLowException();
+		std::cout << BOLDGREEN << std::setw(12) << std::left << "sucess✅" << RESET << "|";
+		std::cout << target << std::setw(50) << std::left << " has been pardoned by Zaphod Beeblebrox." << RESET << std::endl;
+	}
+	catch (std::exception &e){
+		std::cout << BOLDRED << std::setw(13) << std::left << "fail🚫" << RESET << "|";
+		std::cout << std::setw(50) << std::left << std::setfill('.') << RESET << std::endl << std::setfill(' ');
+	}
+
 }
 
 

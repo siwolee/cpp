@@ -24,7 +24,6 @@ void ScalaConverter::convert(std::string str){
 	long int i;
 	float f;
 	double d;
-	// std::istringstream iss(str + " " + str + " " + str + " " + str);
 
 	//display char 
 	//- if not displayable, display "Non displayable"

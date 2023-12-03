@@ -3,14 +3,16 @@
 #include <iostream>
 #include "./Bureaucrat.hpp"
 
+#define RESET   "\033[0m"
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+
 class Bureaucrat;
 
+//const 해석
 class Form {
-	private:
-		std::string	const	name;
-		bool				isSigned;
-		int					signGrade;
-		int					execGrade;
 	public:
 		Form();
 		~Form();
@@ -31,6 +33,11 @@ class Form {
 			public:
 				virtual const char* what() const throw();
 		};
+	private:
+		std::string	const	name;
+		bool				isSigned;
+		int					signGrade;
+		int					execGrade;
 };
 
 std::ostream & operator<<(std::ostream & out, const Form & self);
