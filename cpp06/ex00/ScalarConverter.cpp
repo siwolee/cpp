@@ -1,72 +1,70 @@
-#include <string.h>
-#include "ScalarConverter.hpp"
+#include <string>
+#include <cstdlib>
+#include <iomanip>
 #include <sstream>
-
-//stof, stod -> c++ 11
-void	ft_stoi(std::string str){
-	int 		i;
-	std::string	res;
-	std::stringstream	ss(str);
-	try {
-		ss >> i;
-	}
-	catch (std::exception & e){
-		std::cout << "int    : impossible" << std::endl;
-	}
-	std::cout << "int    : " << i << std::endl;
-}
-
-
+#include "ScalarConverter.hpp"
 
 
 void ScalaConverter::convert(std::string str){
-	char c;
-	long int i;
-	float f;
-	double d;
+	int	const			CMDCNT = 6;
+	double base;
 
-	//display char 
-	//- if not displayable, display "Non displayable"
-	//- if not a char, display "impossible"
-	try {
-		i = strtol(str);
-		c = static_cast<char>(i);
+	std::string inf[CMDCNT] = {"inf", "+inf", "-inf", "inff", "-inff", "+inff"};
+	std::string nan[CMDCNT] = {"nan", "+nan", "-nan", "nanf", "-nanf", "+nanf"};
+
+	for (int i = 0; i < CMDCNT ; i++){
+		if (inf[i] == str){
+			std::cout << "char   : impossible" << std::endl;
+			std::cout << "int    : impossible" << std::endl;
+			std::cout << "float  : inff" << std::endl;
+			std::cout << "double : inf" << std::endl;
+			return ;
+		}
+		else if (nan[i] == str){
+			std::cout << "char   : impossible" << std::endl;
+			std::cout << "int    : impossible" << std::endl;
+			std::cout << "float  : nanf" << std::endl;
+			std::cout << "double : nan" << std::endl;
+			return ;
+		}
 	}
-	catch (std::exception & e){
-		std::cout << "char   : impossible" << std::endl;
-	}
-	std::cout << "char   : " << c << std::endl;
-
-	//display int
-	//if it's behind int range, display "impossible"
-	// try {
-	// 	iss >> i;
-	// 	std::cout << "int    : " << i << std::endl;
-	// }
-	// catch (std::exception & e){
-	// 	std::cout << "int    : impossible" << std::endl;
-	// }
-
 	
-	// //display float
-	// //-inff, +inff, nanf
-	// try {
-	// 	iss >> f;
-	// 	std::cout << "float  : " << i << "f" << std::endl; 
-	// }
-	// catch (std::exception & e){
-	// 	std::cout << "float  : impossible" << std::endl;
-	// }
+	if (str[str.size() - 1] == 'f')
+		str.erase(str.end() - 1);
+	
+	std::stringstream	ss(str);
+	ss >> base;
+	if (ss.fail()){
+		std::cout << "char   : impossible" << std::endl;
+		std::cout << "int    : impossible" << std::endl;
+		std::cout << "float  : impossible" << std::endl;
+		std::cout << "double : impossible" << std::endl;
+		return ;
+	}
+	
+	//char
+	if (base < -128 || base > 127){
+		std::cout << "char   : impossible" << std::endl;
+		// std::cout << "char   : '" << static_cast<char>(base) << "'" << std::endl;
+	}
+	else if (base > 126 || base < 33){
+		std::cout << "char   : Non displayable" << std::endl;
+		// std::cout << "char   : '" << static_cast<char>(base) << "'" << std::endl;
+	}
+	else {
+		std::cout << "char   : '" << static_cast<char>(base) << "'" << std::endl;
+	}
 
-	// //display double
-	// //-inf, +inf, nan
-	// 	iss >> d;
-	// try {
-	// 	std::cout << "double : " << d << std::endl;
-	// }
-	// catch (std::exception & e){
-	// 	std::cout << "double : impossible" << std::endl;
-	// }
+	//int
+	if (base > 2147483647 || base < -2147483648){
+		std::cout << "int    : impossible" << std::endl;
+		// std::cout << "int    : " << static_cast<int>(base) << std::endl;
+	}
+	else 
+		std::cout << "int    : " << static_cast<int>(base) << std::endl;
+		
+	std::cout << "float  : " << std::fixed << std::setprecision(1) << static_cast<float>(base) << "f"<< std::endl;
+	std::cout << "double : " << std::fixed << std::setprecision(1) << static_cast<double>(base) << std::endl;
 }
 
 ScalaConverter::ScalaConverter(){}

@@ -33,7 +33,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const{
 		if (seed == 1)
 			std::cout << BOLDGREEN << std::setw(50) << std::left << "robotomised " + target + RESET + "(drilling noise)" << std::endl;
 		else
-			std::cout << BOLDRED << std::setw(50) << std::left << "not robotomised" + target + RESET + "(drilling noise)" << std::endl;
+			std::cout << BOLDRED << std::setw(50) << std::left << "not robotomised " + target + RESET + "(drilling noise)" << std::endl;
 	}
 	catch (std::exception &e){
 		std::cout << BOLDRED << std::setw(13) << std::left << "fail🚫" << RESET << "|";

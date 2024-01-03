@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
 
-
 void	Bureaucrat::increaseGrade(){
 	try {
 		grade--;
