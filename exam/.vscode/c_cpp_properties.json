@@ -5,15 +5,13 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "defines": [],
-      "macFrameworkPath": [
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks"
-      ],
+      "compilerPath": "/usr/bin/clang",
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "macos-clang-arm64",
-      "configurationProvider": "ms-vscode.makefile-tools",
-      "compilerPath": "/usr/bin/clang"
+      "compilerArgs": [
+        ""
+      ]
     }
   ],
   "version": 4
