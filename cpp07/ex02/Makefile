@@ -1,44 +1,59 @@
-NAME		= ex
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    MAKEFILE                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/18 09:06:28 by siwolee           #+#    #+#              #
+#    Updated: 2024/04/15 11:46:31 by siwolee          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FILES		= main
-SRCSDIR		= ./
-SRCS		= $(FILES:%=$(SRCSDIR)%.cpp)
+NAME	=	ex
 
-OBJSDIR		= ./.obj/
-OBJS		= $(FILES:%=$(OBJSDIR)%.o)
+FILE	=   main
+SRCDIR = 
+SRC		=   $(addprefix $(FILE), .cpp)
+SRCS	=	$(addprefix $(SRCDIR), $(SRC))
 
-CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -I./
-DBFLAGS		=
+OBJDIR	=	.obj/
+OBJ		=	$(addprefix $(FILE), .o)
+OBJS	=	$(addprefix $(OBJDIR), $(OBJ))
 
-RM			= rm -rf
+CXX		=	c++
+CXXFLAGS=   -Wall -Wextra -Werror -std=c++98 -I./
+DBFLAGS =
+RM		=	rm -rf
 
-ifdef DEBUG
-	DBFLAGS	+= -fsanitize=address -g3
-	# NAME	= $(addsuffix _debug, $(NAME))
+ifdef	DEBUG
+		DBFLAGS		+=	-fsanitize=address -g3
+		NAME		=	$(addsuffix _debug, $(NAME))
 endif
 
-all: $(NAME)
+all	:	$(OBJDIR) $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(DBFLAGS) -o $@ $^
+$(OBJDIR)	:
+	@mkdir $(OBJDIR)
 
-$(OBJS): $(OBJSDIR)%.o : $(SRCSDIR)%.cpp
-	@mkdir -p $(OBJSDIR)
-	$(CXX) $(CXXFLAGS) $(DBFLAGS) -c $< -o $@
+$(NAME)		:	$(OBJS)
+			$(CXX) $(CXXFLAGS) $(DBFLAGS) -o $(NAME) $(OBJS)
 
-clean:
-	$(RM) $(OBJSDIR)
+$(OBJDIR)%.o	:	$(SRCSDIR)%.cpp
+			$(CXX) $(CXXFLAGS) $(DBFLAGS) -c $< -o $@
 
-fclean: clean
-	$(RM) $(NAME)
+clean	:
+			$(RM) $(OBJDIR) $(OBJS)
 
-debug:
-	@$(MAKE) DEBUG=1 all
+fclean	:	clean
+			$(RM) $(NAME)
 
-rebug: clean
-	@$(MAKE) DEBUG=1 all
+debug	:
+			@make DEBUG=1 all
 
-re: fclean all
+rebug	:	clean
+			@make DEBUG=1 all
 
-.PHONY: all clean fclean debug rebug re
+re	:	fclean all
+
+.PHONY	:	all clean fclean debug rebug re
