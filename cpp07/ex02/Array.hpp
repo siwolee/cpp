@@ -5,8 +5,11 @@
 
 template <class T> class Array {
   public:
-    Array() : data(new T[0]()), data_count(0) {}
-    Array(unsigned int n) : data(new T[n]()), data_count(n) {}
+    Array() : data(new T[0]()), data_count(1) {}
+    Array(unsigned int n) : data(new T[n]()), data_count(n) {
+        if (n == 0)
+            data_count = 1;
+    }
 
     Array(const Array &ref) : data(NULL), data_count(0) { *this = ref; }
 
