@@ -1,28 +1,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MAKEFILE                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 09:06:28 by siwolee           #+#    #+#              #
-#    Updated: 2023/11/18 09:10:18 by siwolee          ###   ########.fr        #
+#    Updated: 2024/04/15 11:46:31 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	ex
 
-FILE	= main
-SRCSDIR = ./
-SRC		=  $(addprefix $(FILE), .cpp)
+FILE	=   main
+SRCDIR = 
+SRC		=   $(addprefix $(FILE), .cpp)
 SRCS	=	$(addprefix $(SRCDIR), $(SRC))
 
-OBJSDIR	=	./.obj/
+OBJDIR	=	.obj/
 OBJ		=	$(addprefix $(FILE), .o)
 OBJS	=	$(addprefix $(OBJDIR), $(OBJ))
 
 CXX		=	c++
-CXXFLAGS=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS=   -Wall -Wextra -Werror -std=c++98
 DBFLAGS =
 RM		=	rm -rf
 
@@ -39,7 +39,7 @@ $(OBJSDIR)	:
 $(NAME)		:	$(OBJS)
 			$(CXX) $(CXXFLAGS) $(DBFLAGS) -o $(NAME) $(OBJS)
 
-$(OBJSDIR)%.o	:	$(SRCSDIR)%.cpp
+$(OBJDIR)%.o	:	$(SRCSDIR)%.cpp
 			$(CXX) $(CXXFLAGS) $(DBFLAGS) -c $< -o $@
 
 clean	:

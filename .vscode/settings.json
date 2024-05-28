@@ -76,7 +76,11 @@
     "compare": "cpp",
     "concepts": "cpp",
     "numeric": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "__tree": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "map": "cpp"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",

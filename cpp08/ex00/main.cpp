@@ -1,8 +1,30 @@
-#include "easyfind.hpp"
 #include <iostream>
+// sequence containers : iteratable
+#include <array>        //static, contiguous
+#include <deque>        // double-ended queue
+#include <forward_list> //single ended list (->)
+#include <list>         //doubly ended list (<->)
+#include <vector>       //dynamic, contiguous
+// associative containers: implement sorted data structures
+// set, map, multiset, multimap.
+
+#include "easyfind.hpp"
 
 int main() {
-    int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    // empty test
+    {
+        std::array<int, 0> empty_array;
+        // std::deque<int> empty_deque;
+        // std::forward_list<int> empty_forward_list;
+        // std::list<int> empty_list;
+        // std::vector<int> empty_vector;
+        int target = 1;
 
-    std::cout << ::easyfind(arr, 2) << std::endl;
+        try {
+            std::cout << "Array empty :" << easyfind(empty_array, target)
+                      << std::endl;
+        } catch (std::exception &e) {
+            std::cerr << e.what() << std::endl;
+        }
+    }
 }

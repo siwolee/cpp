@@ -12,17 +12,17 @@
 
 NAME	=	ex
 
-FILE	= main
-SRCSDIR = ./
-SRC		=  $(addprefix $(FILE), .cpp)
+FILE	=   main
+SRCDIR = 
+SRC		=   $(addprefix $(FILE), .cpp)
 SRCS	=	$(addprefix $(SRCDIR), $(SRC))
 
-OBJSDIR	=	./.obj/
+OBJDIR	=	.obj/
 OBJ		=	$(addprefix $(FILE), .o)
 OBJS	=	$(addprefix $(OBJDIR), $(OBJ))
 
 CXX		=	c++
-CXXFLAGS=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS=   -Wall -Wextra -Werror -std=c++98
 DBFLAGS =
 RM		=	rm -rf
 
@@ -31,19 +31,19 @@ ifdef	DEBUG
 		NAME		=	$(addsuffix _debug, $(NAME))
 endif
 
-all	:	$(OBJSDIR) $(NAME)
+all	:	$(OBJDIR) $(NAME)
 
-$(OBJSDIR)	:
-	@mkdir $(OBJSDIR)
+$(OBJDIR)	:
+	@mkdir $(OBJDIR)
 
 $(NAME)		:	$(OBJS)
 			$(CXX) $(CXXFLAGS) $(DBFLAGS) -o $(NAME) $(OBJS)
 
-$(OBJSDIR)%.o	:	$(SRCSDIR)%.cpp
+$(OBJDIR)%.o	:	$(SRCSDIR)%.cpp
 			$(CXX) $(CXXFLAGS) $(DBFLAGS) -c $< -o $@
 
 clean	:
-			$(RM) $(OBJSDIR) $(OBJS)
+			$(RM) $(OBJDIR) $(OBJS)
 
 fclean	:	clean
 			$(RM) $(NAME)

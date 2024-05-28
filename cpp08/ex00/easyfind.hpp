@@ -1,19 +1,19 @@
-
 #ifndef EASYFIND_HPP
 #define EASYFIND_HPP
-
 #include <stdexcept>
 
-template <typename T> T easyfind<T>(T ptr, int target) {
-    if (!*ptr)
-        return;
-
-    while (ptr) {
-        if (*ptr == = target)
-            return (ptr);
-        ptr++;
+template <typename T>
+int easyfind(T &container, int &target) throw(std::out_of_range) {
+    std::iterator<T> iter = container.begin();
+    try {
+        std::cout << iter << std::endl;
+        while (iter != container.end()) {
+            if (*iter == target)
+                return iter;
+        }
+        iter++;
     }
-    return NULL;
+    throw std::out_of_range("no occurance found");
 }
 
 #endif
