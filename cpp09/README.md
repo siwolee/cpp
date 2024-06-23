@@ -12,8 +12,6 @@
  >
  > Forbidden functions : None
 
-You have to create a program which outputs the value of a certain amount of bitcoin
-on a certain date.
 특정한 일자의 특정한 양의 비트코인을 출력하는 프로그램을 만드시오.
 
 날짜에 따른 비트코인 가격을 보여주는 csv 데이터베이스를 사용하며, 문제에서 제공됩니다.

@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
+#    By: haecho <haecho@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 09:06:28 by siwolee           #+#    #+#              #
-#    Updated: 2024/05/30 17:51:35 by siwolee          ###   ########.fr        #
+#    Updated: 2024/06/22 13:23:37 by haecho           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ex02
+NAME	=	ex
 
 FILE	=	main
 
