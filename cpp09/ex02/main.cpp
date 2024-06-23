@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "MergeInsertSort.hpp"
+#include "PmergeMe.hpp"
 
 int main() {
   std::vector<int> v(10);
@@ -10,13 +10,7 @@ int main() {
   for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); iter++) {
     *iter = std::rand();
   }
-  for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); iter++) {
-    std::cout << *iter << std::endl;
-  }
 
   std::cout << "------------------sorted?" << std::endl;
-  merge_sort(v);
-  for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); iter++) {
-    std::cout << *iter << std::endl;
-  }
-}
+  merge_insert_sort(v);
+} 

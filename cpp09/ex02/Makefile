@@ -12,7 +12,7 @@
 
 NAME	=	ex
 
-FILE	=	main
+FILE	=	main PmergeMe
 
 SRCSDIR = ./
 SRC		=  	$(addsuffix .cpp, $(FILE))
