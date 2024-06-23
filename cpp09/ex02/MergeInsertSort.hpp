@@ -1,22 +1,36 @@
 #include <algorithm>
 #include <vector>
 
-getJacobstal() {}
-
 template <typename T>
-void _getPos(std::vector<T> &arr, size_t len) {}
+void  _swap(std::vector<T> &arr, size_t pos_a, size_t pos_b) {
+  T temp;
+  temp = arr[pos_a];
+  arr[pos_a] = arr[pos_b];
+  arr[pos_b] = temp;
+}
+
+//calculcate position to get position
+//arr is copied array, len is length to calculate and also position of key
+//just comparing in order, not binary search
+template <typename T>
+size_t _getPos(std::vector<T> &arr, size_t len) {
+  for (size_t i = 0; i < len ; i++ ){
+    if (arr[i] > arr[len]){
+      return i;
+    }
+  }
+  return len;
+}
 
 template <typename T>
 void _insert_merge(std::vector<T> &arr, size_t low, size_t high) {
-  std::vector<T> unsorted_arr(high - low);
-  size_t length = high - low;
-
-  // 초기화
-  for (int i = low; i < high; i++) unsorted_arr.push_back(arr[i]);
-  while (length) {
-    arr[_getPos(unsorted_arr, length) + low] = unsorted_arr[length];
-    length--;
+  
+  // 순서 역순으로 계산하면 귀찮아짐
+  for (size_t curr_pos = low; curr_pos < high; curr_pos++) {
+    size_t pos = _getPos(arr, curr_pos);
+    _swap(arr, pos, curr_pos);
   }
+
 }
 
 template <typename T>

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "MergeSort.hpp"
+#include "MergeInsertSort.hpp"
 
 int main() {
   std::vector<int> v(10);
