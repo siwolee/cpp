@@ -21,13 +21,11 @@ size_t PmergeMe::_divideConquer(std::vector<unsigned int>& arr,
   size_t left = 0;
   size_t right = idx - 1;
   size_t mid = (left + right) / 2;
-  unsigned int res = 0;
   while (left < right) {
     mid = (left + right) / 2;
-    res = arr[main_seq[idx]] - arr[main_seq[mid]];
-    if (res > 0) {  // mid < idx
+    if (arr[main_seq[idx]] > arr[main_seq[mid]]) {  // mid < idx
       left = mid + 1;
-    } else if (res < 0) {  // mid > idx
+    } else if (arr[main_seq[idx]] < arr[main_seq[mid]]) {  // mid > idx
       right = mid;
     } else {
       return mid + 1;
@@ -42,6 +40,11 @@ size_t PmergeMe::_divideConquer(std::vector<unsigned int>& arr,
 
 void PmergeMe::merge_insert_sort(std::vector<unsigned int>& arr, size_t rank) {
   std::vector<size_t> main_seq;
+
+  // if (rank == 1) {
+  //   _arr = arr;
+  //   arr_size = arr.size();
+  // }
 
   // check if the array is odd
   bool is_odd = false;

@@ -24,6 +24,8 @@ class PmergeMe {
                                std::vector<size_t> main_seq, size_t idx);
   static void _insert(std::vector<unsigned int>& arr, size_t curr,
                       size_t target, size_t size);
+  // std::vector<unsigned int>& _arr;
+  // size_t arr_size;
 };
 
 #endif  // PMERGEME_HPP
