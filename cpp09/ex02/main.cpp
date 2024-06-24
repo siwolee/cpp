@@ -4,18 +4,26 @@
 
 #include "PmergeMe.hpp"
 
+template <typename Container>
+void print_all_list(std::string preText, Container arr) {
+  std::cout << preText;
+  for (typename Container::iterator it = arr.begin(); it != arr.end(); it++) {
+    std::cout << " " << *it;
+  }
+  std::cout << std::endl;
+}
+
 int main() {
-  std::vector<int> v(10);
+  std::vector<unsigned int> v(10);
   std::srand(std::time(0));
-  for (std::vector<int>::iterator iter = v.begin(); iter != v.end(); iter++) {
+  for (std::vector<unsigned int>::iterator iter = v.begin(); iter != v.end();
+       iter++) {
     *iter = std::rand() % 20;
   }
 
+  print_all_list("Before:", v);
   std::cout << "------------------sorted?" << std::endl;
   // merge_insert_sort(v);
-  std::cout << "Before:";
-  print_all_list(v);
-  merge_insert_sort(v, 1);
-  std::cout << "After";
-  print_all_list(v);
+  PmergeMe::merge_insert_sort(v, 1);
+  print_all_list("After:", v);
 }
