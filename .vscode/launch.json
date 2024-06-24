@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/siwolee/cpp/cpp09/ex02",
-      "program": "/Users/siwolee/cpp/cpp09/ex02/ex"
+      "cwd": "/Users/haecho/42/cpp/cpp09/ex02",
+      "program": "/Users/haecho/42/cpp/cpp09/ex02/ex"
     }
   ]
 }
