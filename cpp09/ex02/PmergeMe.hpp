@@ -9,23 +9,23 @@
 // unsigned intemplate class definition
 class PmergeMe {
  public:
-  static void merge_insert_sort(std::vector<unsigned int>& arr, size_t rank);
-  static void merge_insert_sort(std::deque<unsigned int>& arr, size_t rank);
+  void merge_insert_sort(size_t rank);
+  void merge_insert_sort(std::deque<unsigned int>& arr, size_t rank);
+
+  PmergeMe(std::vector<unsigned int>& arr);
+  ~PmergeMe();
 
  private:
-  PmergeMe();
-  ~PmergeMe();
   PmergeMe(const PmergeMe& other);
   PmergeMe& operator=(const PmergeMe& other);
 
-  static void _swap(std::vector<unsigned int>& arr, size_t front, size_t back,
-                    size_t size);
-  static size_t _divideConquer(std::vector<unsigned int>& arr,
-                               std::vector<size_t> main_seq, size_t idx);
-  static void _insert(std::vector<unsigned int>& arr, size_t curr,
-                      size_t target, size_t size);
-  // std::vector<unsigned int>& _arr;
-  // size_t arr_size;
+  void _swap(size_t front, size_t back, size_t size);
+  size_t _divideConquer(std::vector<size_t> main_seq, size_t idx);
+  void _insert(size_t curr, size_t target, size_t size);
+
+  std::vector<unsigned int>& _arr;
+  size_t _size;
+  static const unsigned long _jacobstal[32];
 };
 
 #endif  // PMERGEME_HPP

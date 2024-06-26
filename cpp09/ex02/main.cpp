@@ -24,6 +24,7 @@ int main() {
   print_all_list("Before:", v);
   std::cout << "------------------sorted?" << std::endl;
   // merge_insert_sort(v);
-  PmergeMe::merge_insert_sort(v, 1);
+  PmergeMe pm(v);
+  pm.merge_insert_sort(1);
   print_all_list("After:", v);
 }
