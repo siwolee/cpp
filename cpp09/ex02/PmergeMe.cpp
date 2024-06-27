@@ -9,6 +9,22 @@ void _print_all_list(std::string preText, Container arr) {
   std::cout << std::endl;
 }
 
+void _print_all_list_ms(std::string preText, std::vector<unsigned int> arr, std::vector<size_t> ms) {
+  std::cout << "\n" << preText;
+  std::vector<size_t>::iterator msit = ms.begin();
+ size_t i = 0;
+  while (msit != ms.end() && i < arr.size()){
+    if (*msit == i){
+      std::cout << "[" << *msit << "]";
+      msit++;
+    }
+    std::cout << arr[i] << " ";
+    i++;
+  }
+  std::cout << std::endl;
+}
+
+
 void PmergeMe::_swap(size_t front, size_t back, size_t size) {
   while (size-- > 0) {
     std::swap(_arr[front--], _arr[back--]);
@@ -88,14 +104,14 @@ void PmergeMe::merge_insert_sort(size_t rank) {
   size_t i = 0;
   size_t pos;
   std::cout << "\nstart rank " << std::to_string(rank) << std::endl;
-  _print_all_list(std::to_string(rank) + " ...::", main_seq);
+  _print_all_list(" mainseq:: ", main_seq);
 
   while (_jacobstal[jacolstal_idx] < main_seq.size()) {
     i = 0;  // 범위조절 인덱스 : 시작위치 뒤로 밀림
     for (size_t idx = _jacobstal[jacolstal_idx];
          idx > _jacobstal[jacolstal_idx - 1]; idx--) {
       i++;
-      _print_all_list(std::to_string(rank) + " ::", _arr);
+      _print_all_list_ms(std::to_string(rank) + " ::", _arr, main_seq);
       pos = _divideConquer(main_seq, idx, i, _jacobstal[jacolstal_idx - 1] + i);
       if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
     }
@@ -109,7 +125,7 @@ void PmergeMe::merge_insert_sort(size_t rank) {
     i++;
     size_t right = _jacobstal[jacolstal_idx - 1] + i;
     if (_jacobstal[jacolstal_idx - 1] + i > idx) right = idx == idx - 1;
-    _print_all_list(std::to_string(rank) + " ::::", _arr);
+    _print_all_list_ms(std::to_string(rank) + " ::::", _arr, main_seq);
     pos = _divideConquer(main_seq, idx, i, right);
     if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
   }
