@@ -14,11 +14,11 @@ void print_all_list(std::string preText, Container arr) {
 }
 
 int main() {
-  std::vector<unsigned int> v(50);
+  std::vector<unsigned int> v(10);
   std::srand(std::time(0));
   for (std::vector<unsigned int>::iterator iter = v.begin(); iter != v.end();
        iter++) {
-    *iter = std::rand() % 50;
+    *iter = std::rand() % 30;
   }
 
   print_all_list("Before:", v);
