@@ -26,9 +26,9 @@ void PmergeMe::_insert(size_t curr, size_t target, size_t size) {
 size_t PmergeMe::_divideConquer(std::vector<size_t> main_seq, size_t idx,
                                 size_t left, size_t right) {
   size_t mid = 0;
-  if (idx % 2 == 0) {  // idx is not on main sequence
-    left = 0;
-  }
+  // if (idx % 2 == 0) {  // idx is not on main sequence
+  //   left = 0;
+  // }
   std::cout << "idx [" << idx << "]=" << _arr[main_seq[idx]] << " left[" << left
             << "]=" << _arr[main_seq[left]] << " right: [" << right
             << "]=" << _arr[main_seq[right]] << std::endl;
@@ -86,26 +86,34 @@ void PmergeMe::merge_insert_sort(size_t rank) {
   // merge the two sequences by divide / insert
   size_t jacolstal_idx = 1;
   size_t i = 0;
+  size_t pos;
+  std::cout << "\nstart rank " << std::to_string(rank) << std::endl;
+  _print_all_list(std::to_string(rank) + " ...::", main_seq);
+
   while (_jacobstal[jacolstal_idx] < main_seq.size()) {
-    i = 0;  // 범위조절 인덱스
+    i = 0;  // 범위조절 인덱스 : 시작위치 뒤로 밀림
     for (size_t idx = _jacobstal[jacolstal_idx];
          idx > _jacobstal[jacolstal_idx - 1]; idx--) {
       i++;
-      size_t pos =
-          _divideConquer(main_seq, idx, i, _jacobstal[jacolstal_idx - 1] + i);
+      _print_all_list(std::to_string(rank) + " ::", _arr);
+      pos = _divideConquer(main_seq, idx, i, _jacobstal[jacolstal_idx - 1] + i);
       if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
     }
     jacolstal_idx++;
   }
   jacolstal_idx--;
   i = 0;
+  std::cout << "\nrank.... " << std::to_string(rank) << std::endl;
   for (size_t idx = main_seq.size() - 1; idx > _jacobstal[jacolstal_idx - 1];
        idx--) {
     i++;
-    size_t pos =
-        _divideConquer(main_seq, idx, i, _jacobstal[jacolstal_idx - 1] + i);
+    size_t right = _jacobstal[jacolstal_idx - 1] + i;
+    if (_jacobstal[jacolstal_idx - 1] + i > idx) right = idx == idx - 1;
+    _print_all_list(std::to_string(rank) + " ::::", _arr);
+    pos = _divideConquer(main_seq, idx, i, right);
     if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
   }
+  std::cout << "\nrank end " << std::to_string(rank) << "\n" << std::endl;
 }
 // Explicit template instantiation
 // template void print_all_list<std::vector<unsigned int><int>

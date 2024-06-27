@@ -14,7 +14,7 @@ void print_all_list(std::string preText, Container arr) {
 }
 
 int main() {
-  std::vector<unsigned int> v(10);
+  std::vector<unsigned int> v(30);
   std::srand(std::time(0));
   for (std::vector<unsigned int>::iterator iter = v.begin(); iter != v.end();
        iter++) {
