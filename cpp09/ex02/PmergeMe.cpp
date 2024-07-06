@@ -1,5 +1,7 @@
 #include "PmergeMe.hpp"
 
+size_t main_seq_idx(size_t i, size_t rank) { return (i * rank - 1); };
+
 template <typename Container>
 void _print_all_list(std::string preText, Container arr) {
   std::cout << preText;
@@ -9,21 +11,21 @@ void _print_all_list(std::string preText, Container arr) {
   std::cout << std::endl;
 }
 
-void _print_all_list_ms(std::string preText, std::vector<unsigned int> arr, std::vector<size_t> ms) {
-  std::cout << "\n" << preText;
-  std::vector<size_t>::iterator msit = ms.begin();
- size_t i = 0;
-  while (msit != ms.end() && i < arr.size()){
-    if (*msit == i){
-      std::cout << "[" << *msit << "]";
-      msit++;
-    }
-    std::cout << arr[i] << " ";
-    i++;
-  }
-  std::cout << std::endl;
-}
-
+// void _print_all_list_ms(std::string preText, std::vector<unsigned int> arr,
+//                         std::vector<unsigned int> ms) {
+//   std::cout << "\n" << preText;
+//   std::vector<unsigned int>::iterator msit = ms.begin();
+//   size_t i = 0;
+//   while (msit != ms.end() && i < arr.size()) {
+//     if (*msit == i) {
+//       std::cout << "[" << *msit << "]";
+//       msit++;
+//     }
+//     std::cout << arr[i] << " ";
+//     i++;
+//   }
+//   std::cout << std::endl;
+// }
 
 void PmergeMe::_swap(size_t front, size_t back, size_t size) {
   while (size-- > 0) {
@@ -31,48 +33,46 @@ void PmergeMe::_swap(size_t front, size_t back, size_t size) {
   }
 }
 
-void PmergeMe::_insert(size_t curr, size_t target, size_t size) {
-  std::vector<unsigned int> temp(_arr.begin() + curr - size + 1,
-                                 _arr.begin() + curr + 1);
-  _arr.erase(_arr.begin() + curr - size + 1, _arr.begin() + curr + 1);
+// void PmergeMe::_insert(size_t curr, size_t target, size_t size) {
+//   std::vector<unsigned int> temp(_arr.begin() + curr - size + 1,
+//                                  _arr.begin() + curr + 1);
+//   _arr.erase(_arr.begin() + curr - size + 1, _arr.begin() + curr + 1);
 
-  _arr.insert(_arr.begin() + target - size + 1, temp.begin(), temp.end());
-}
+//   _arr.insert(_arr.begin() + target - size + 1, temp.begin(), temp.end());
+// }
 
-size_t PmergeMe::_divideConquer(std::vector<size_t> main_seq, size_t idx,
-                                size_t left, size_t right) {
-  size_t mid = 0;
-  // if (idx % 2 == 0) {  // idx is not on main sequence
-  //   left = 0;
-  // }
-  std::cout << "idx [" << idx << "]=" << _arr[main_seq[idx]] << " left[" << left
-            << "]=" << _arr[main_seq[left]] << " right: [" << right
-            << "]=" << _arr[main_seq[right]] << std::endl;
-  while (left < right) {
-    mid = (left + right) / 2;
-    if (_arr[main_seq[idx]] > _arr[main_seq[mid]]) {  // mid < idx
-      left = mid + 1;
-    } else if (_arr[main_seq[idx]] < _arr[main_seq[mid]]) {  // mid > idx
-      right = mid;
-    } else {
-      return mid + 1;
-    }
-  }
-  if (_arr[main_seq[idx]] > _arr[main_seq[right]]) {
-    return idx;
-  } else {
-    return left;
-  }
-}
+// size_t PmergeMe::_divideConquer(std::vector<unsigned int> sorted, unsigned
+// int value,
+//                                 size_t right) {
+//   size_t left = 0;
+//   size_t mid = right / 2;
+
+//   std::cout << "value : " << value << " left[" << left
+//             << "]=" << sorted[left] << " right: [" << right
+//             << "]=" << sorted[right] << std::endl;
+//   while (left < right) {
+//     mid = (left + right) / 2;
+//     if (value > sorted[mid]) {  // mid < idx
+//       left = mid + 1;
+//     } else if (idx < sorted[mid]) {  // mid > idx
+//       right = mid;
+//     } else {
+//       return mid + 1;
+//     }
+//   }
+//   if (value > sorted[right]) {
+//     return right + 1;
+//   } else {
+//     return left;
+//   }
+// }
 
 void PmergeMe::merge_insert_sort(size_t rank) {
-  std::vector<size_t> main_seq;
+  std::vector<unsigned int> main_seq;
+  std::vector<unsigned int> sub_seq;
+  std::vector<unsigned int> sorted_seq;
+  size_t seq_len = _size / rank;
 
-  // check if the _array is odd
-  bool is_odd = false;
-  if (_size % 2) {
-    is_odd = true;
-  }
   // get main(winner) sequence
   // swap the elements - winner goes for last
   for (size_t front = rank - 1; front + rank < _size; front += 2 * rank) {
@@ -80,56 +80,53 @@ void PmergeMe::merge_insert_sort(size_t rank) {
     if (_arr[back] < _arr[front]) {
       _swap(front, back, rank);
     }
-    main_seq.push_back(front);
-    main_seq.push_back(back);
+    sub_seq.push_back(_arr[front]);
+    main_seq.push_back(_arr[back]);
   }
   _print_all_list("test:: ", _arr);
   // recv for winner sequence
-  if (main_seq.size() > 2) {
+
+  if (seq_len >= 2) {
     merge_insert_sort(rank * 2);
-  }
+  } else
+    return;
 
-  // for (size_t i = 0; i < main_seq.size(); i++) {
-  //   std::cout << _arr[main_seq[i]] << " ";
-  // }
-  // std::cout << std::endl;
-
-  // add the last element if the _array is odd
-  if (is_odd) {
-    main_seq.push_back(_size - 1);
+  // add the last element
+  //  if the _array is odd
+  if (_size % 2) {
+    sub_seq.push_back(_size - 1);
   }
 
   // merge the two sequences by divide / insert
-  size_t jacolstal_idx = 1;
-  size_t i = 0;
-  size_t pos;
   std::cout << "\nstart rank " << std::to_string(rank) << std::endl;
-  _print_all_list(" mainseq:: ", main_seq);
+  _print_all_list("- mainseq:: ", main_seq);
+  _print_all_list("- subseq:: ", sub_seq);
+  // _print_all_list_ms("before:: ", _arr, main_seq);
+  int j = 1;
+  size_t x = 0;
+  sorted_seq.push_back(main_seq[0]);
+  sorted_seq.push_back(sub_seq[0]);  // make sorted list
+  seq_len = sub_seq.size();
+  // size_t sorted_len;
+  while (_j_idx(j) < seq_len) {
+    // sorted 갯수 : _jacobstal[j] * 2;
+    for (size_t i = _j_idx(j); i < _j_idx(j + 1);
+         i++)  // add main seq to sorted list
+      sorted_seq.push_back(i * rank);
+    // sorted 세팅 끝
 
-  while (_jacobstal[jacolstal_idx] < main_seq.size()) {
-    i = 0;  // 범위조절 인덱스 : 시작위치 뒤로 밀림
-    for (size_t idx = _jacobstal[jacolstal_idx];
-         idx > _jacobstal[jacolstal_idx - 1]; idx--) {
-      i++;
-      _print_all_list_ms(std::to_string(rank) + " ::", _arr, main_seq);
-      pos = _divideConquer(main_seq, idx, i, _jacobstal[jacolstal_idx - 1] + i);
-      if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
+    // 다음 야콥스탈 수 확인
+    size_t end = _j_idx(j + 1);
+    if (seq_len < _j_idx(j + 1)) end = seq_len;
+    std::vector<unsigned int>::iterator last_elem = sorted_seq.end() - 1;
+    for (size_t curr = end; curr > _j_idx(j); curr--) {
+      sorted_seq.insert(
+          std::lower_bound(sorted_seq.begin(), last_elem, curr) + 1, curr);
+      last_elem--;
     }
-    jacolstal_idx++;
+    j++;
   }
-  jacolstal_idx--;
-  i = 0;
-  std::cout << "\nrank.... " << std::to_string(rank) << std::endl;
-  for (size_t idx = main_seq.size() - 1; idx > _jacobstal[jacolstal_idx - 1];
-       idx--) {
-    i++;
-    size_t right = _jacobstal[jacolstal_idx - 1] + i;
-    if (_jacobstal[jacolstal_idx - 1] + i > idx) right = idx == idx - 1;
-    _print_all_list_ms(std::to_string(rank) + " ::::", _arr, main_seq);
-    pos = _divideConquer(main_seq, idx, i, right);
-    if (pos < idx) _insert(main_seq[idx], main_seq[pos], rank);
-  }
-  std::cout << "\nrank end " << std::to_string(rank) << "\n" << std::endl;
+  _print_all_list("- sorted:: ", sorted_seq);
 }
 // Explicit template instantiation
 // template void print_all_list<std::vector<unsigned int><int>
@@ -151,10 +148,12 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
   return *this;
 };
 
-const unsigned long PmergeMe::_jacobstal[33] = {
+const size_t PmergeMe::_jacobstal[33] = {
     1u,          3u,         5u,        11u,        21u,        43u,
     85u,         171u,       341u,      683u,       1365u,      2731u,
     5461u,       10923u,     21845u,    43691u,     87381u,     174763u,
     349525u,     699051u,    1398101u,  2796203u,   5592405u,   11184811u,
     22369621u,   44739243u,  89478485u, 178956971u, 357913941u, 715827883u,
     1431655765u, 2863311531u};
+
+size_t PmergeMe::_j_idx(size_t i) { return (_jacobstal[i] - 1); }
