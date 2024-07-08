@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
+#    By: haecho <haecho@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 09:06:28 by siwolee           #+#    #+#              #
-#    Updated: 2024/05/30 17:51:35 by siwolee          ###   ########.fr        #
+#    Updated: 2024/07/08 19:19:50 by haecho           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ex02
+NAME	=	RPN
 
-FILE	=	main
+FILE	=	main RPN
 
 SRCSDIR = ./
 SRC		=  	$(addsuffix .cpp, $(FILE))
