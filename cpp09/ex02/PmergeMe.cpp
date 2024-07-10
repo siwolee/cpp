@@ -60,6 +60,8 @@ size_t _main_idx(size_t rank, size_t i) {
   return (rank * 2 - 1 + rank * 2 * i);
 };
 
+size_t pos_to_idx(size_t rank, size_t pos) { return (); }
+
 void PmergeMe::merge_insert_sort(size_t rank) {
   std::vector<unsigned int> main_seq;
   std::vector<unsigned int> sub_seq;
@@ -88,9 +90,8 @@ void PmergeMe::merge_insert_sort(size_t rank) {
   std::vector<unsigned int> sorted_seq;  // to save sorted
   std::vector<unsigned int> temp_seq;    // to save last of sorted
   int j = 1;
-  sorted_seq.push_back(_arr[_sub_idx(rank, 0)]);  // sorted init ::first sub_seq
-  sorted_seq.push_back(
-      _arr[_main_idx(rank, 0)]);  // sorted init ::second sub_seq
+  sorted_seq.push_back(sub_seq[0]);   // sorted init ::first sub_seq
+  sorted_seq.push_back(main_seq[0]);  // sorted init ::second sub_seq
   seq_len = sub_seq.size();
 
   while (_jacobstal[j] < seq_len) {
@@ -99,18 +100,20 @@ void PmergeMe::merge_insert_sort(size_t rank) {
     // sorted에 미리 넣어둠
     // end는 insert할 첫 위치로도 사용
     for (end = _jacobstal[j];
-         end < _jacobstal[j + 1] && _size >= _main_idx(rank, end); end++) {
-      sorted_seq.push_back(_arr[_main_idx(rank, end)]);
-      if (_size <= _main_idx(rank, end)) end++;  // 홀수로 sub_seq가 남았을 때
+         end < _jacobstal[j + 1] && _size >= main_idx.size()); end++) {
+      sorted_seq.push_back(main_seq[end - 1]);
     }
+    if (end < sub_idx.size()) end++;  // 홀수로 sub_seq가 남았을 때
 
-    for (size_t curr = end; curr > _jacobstal(rank, j); curr--) {
-      std::vector<unsigned int>::iterator pos =
-          std::lower_bound(sorted_seq.begin(), sorted_seq.end(),
-                           _arr[_sub_idx(rank, curr)], &comp);
-      sorted_seq.insert(pos, _arr[_sub_idx(rank, curr)]);
+    // 다음 야곱스탈 수 or sub_seq의 끝에서부터 idx를 줄이며 sorted에 insert
+    for (size_t curr = end; curr > _jacobstal[j]; curr--) {
+      std::vector<unsigned int>::iterator pos = std::lower_bound(
+          sorted_seq.begin(), sorted_seq.end(), sub_idx[curr], &comp);
+      sorted_seq.insert(pos, sub_idx[curr]);
       temp_seq.push_back(sorted_seq.back());
       sorted_seq.pop_back();
+      // 실제 _arr에 반영
+      _insert(rank, (pos - sorted_seq.begin()) * rank, curr);
     }
     for (std::vector<unsigned int>::iterator it = temp_seq.end();
          it != temp_seq.begin(); --it) {
