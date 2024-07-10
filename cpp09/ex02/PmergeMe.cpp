@@ -1,31 +1,22 @@
 #include "PmergeMe.hpp"
 
-size_t main_seq_idx(size_t i, size_t rank) { return (i * rank - 1); };
-
-template <typename Container>
-void _print_all_list(std::string preText, Container arr) {
-  std::cout << preText;
-  for (typename Container::iterator it = arr.begin(); it != arr.end(); it++) {
-    std::cout << " " << *it;
-  }
-  std::cout << std::endl;
+PmergeMe::PmergeMe(std::vector<unsigned int>& arr) : _arr(arr) {
+  _size = arr.size();
 }
 
-// void _print_all_list_ms(std::string preText, std::vector<unsigned int> arr,
-//                         std::vector<unsigned int> ms) {
-//   std::cout << "\n" << preText;
-//   std::vector<unsigned int>::iterator msit = ms.begin();
-//   size_t i = 0;
-//   while (msit != ms.end() && i < arr.size()) {
-//     if (*msit == i) {
-//       std::cout << "[" << *msit << "]";
-//       msit++;
-//     }
-//     std::cout << arr[i] << " ";
-//     i++;
-//   }
-//   std::cout << std::endl;
-// }
+PmergeMe::~PmergeMe() {}
+
+PmergeMe::PmergeMe(const PmergeMe& other) : _arr(other._arr) {
+  _size = other._size;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
+  if (this != &other) {
+    _arr = other._arr;
+    _size = other._size;
+  }
+  return *this;
+}
 
 void PmergeMe::_swap(size_t front, size_t back, size_t size) {
   while (size-- > 0) {
@@ -33,120 +24,17 @@ void PmergeMe::_swap(size_t front, size_t back, size_t size) {
   }
 }
 
-// void PmergeMe::_insert(size_t curr, size_t target, size_t size) {
-//   std::vector<unsigned int> temp(_arr.begin() + curr - size + 1,
-//                                  _arr.begin() + curr + 1);
-//   _arr.erase(_arr.begin() + curr - size + 1, _arr.begin() + curr + 1);
+bool PmergeMe::comp(unsigned int a, unsigned int b) { return a < b; }
 
-//   _arr.insert(_arr.begin() + target - size + 1, temp.begin(), temp.end());
-// }
-
-// size_t PmergeMe::_divideConquer(std::vector<unsigned int> sorted, unsigned
-// int value,
-//                                 size_t right) {
-//   size_t left = 0;
-//   size_t mid = right / 2;
-
-//   std::cout << "value : " << value << " left[" << left
-//             << "]=" << sorted[left] << " right: [" << right
-//             << "]=" << sorted[right] << std::endl;
-//   while (left < right) {
-//     mid = (left + right) / 2;
-//     if (value > sorted[mid]) {  // mid < idx
-//       left = mid + 1;
-//     } else if (idx < sorted[mid]) {  // mid > idx
-//       right = mid;
-//     } else {
-//       return mid + 1;
-//     }
-//   }
-//   if (value > sorted[right]) {
-//     return right + 1;
-//   } else {
-//     return left;
-//   }
-// }
-
-void PmergeMe::merge_insert_sort(size_t rank) {
-  std::vector<unsigned int> main_seq;
-  std::vector<unsigned int> sub_seq;
-  std::vector<unsigned int> sorted_seq;
-  size_t seq_len = _size / rank;
-
-  // get main(winner) sequence
-  // swap the elements - winner goes for last
-  for (size_t front = rank - 1; front + rank < _size; front += 2 * rank) {
-    size_t back = front + rank;
-    if (_arr[back] < _arr[front]) {
-      _swap(front, back, rank);
-    }
-    sub_seq.push_back(_arr[front]);
-    main_seq.push_back(_arr[back]);
+void PmergeMe::_print_all_list(const std::string& preText,
+                               const std::vector<unsigned int>& arr) {
+  std::cout << preText;
+  for (std::vector<unsigned int>::const_iterator it = arr.begin();
+       it != arr.end(); ++it) {
+    std::cout << " " << *it;
   }
-  _print_all_list("test:: ", _arr);
-  // recv for winner sequence
-
-  if (seq_len >= 2) {
-    merge_insert_sort(rank * 2);
-  } else
-    return;
-
-  // add the last element
-  //  if the _array is odd
-  if (_size % 2) {
-    sub_seq.push_back(_size - 1);
-  }
-
-  // merge the two sequences by divide / insert
-  std::cout << "\nstart rank " << std::to_string(rank) << std::endl;
-  _print_all_list("- mainseq:: ", main_seq);
-  _print_all_list("- subseq:: ", sub_seq);
-  // _print_all_list_ms("before:: ", _arr, main_seq);
-  int j = 1;
-  size_t x = 0;
-  sorted_seq.push_back(main_seq[0]);
-  sorted_seq.push_back(sub_seq[0]);  // make sorted list
-  seq_len = sub_seq.size();
-  // size_t sorted_len;
-  while (_j_idx(j) < seq_len) {
-    // sorted 갯수 : _jacobstal[j] * 2;
-    for (size_t i = _j_idx(j); i < _j_idx(j + 1);
-         i++)  // add main seq to sorted list
-      sorted_seq.push_back(i * rank);
-    // sorted 세팅 끝
-
-    // 다음 야콥스탈 수 확인
-    size_t end = _j_idx(j + 1);
-    if (seq_len < _j_idx(j + 1)) end = seq_len;
-    std::vector<unsigned int>::iterator last_elem = sorted_seq.end() - 1;
-    for (size_t curr = end; curr > _j_idx(j); curr--) {
-      sorted_seq.insert(
-          std::lower_bound(sorted_seq.begin(), last_elem, curr) + 1, curr);
-      last_elem--;
-    }
-    j++;
-  }
-  _print_all_list("- sorted:: ", sorted_seq);
+  std::cout << std::endl;
 }
-// Explicit template instantiation
-// template void print_all_list<std::vector<unsigned int><int>
-// >(std::vector<unsigned int><int> _arr); template void
-// merge_insert_sort<int>(std::vector<unsigned int><int>& _arr, size_t rank);
-
-PmergeMe::PmergeMe(std::vector<unsigned int>& _arr) : _arr(_arr) {
-  _size = _arr.size();
-};
-
-PmergeMe::~PmergeMe(){};
-
-PmergeMe::PmergeMe(const PmergeMe& other) : _arr(other._arr) {
-  _size = other._size;
-};
-
-PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
-  (void)other;
-  return *this;
-};
 
 const size_t PmergeMe::_jacobstal[33] = {
     1u,          3u,         5u,        11u,        21u,        43u,
@@ -156,4 +44,82 @@ const size_t PmergeMe::_jacobstal[33] = {
     22369621u,   44739243u,  89478485u, 178956971u, 357913941u, 715827883u,
     1431655765u, 2863311531u};
 
-size_t PmergeMe::_j_idx(size_t i) { return (_jacobstal[i] - 1); }
+void PmergeMe::_insert(size_t rank, size_t target_idx, size_t curr_idx) {
+  size_t curr = 0;
+  while (curr < rank) {
+    unsigned int temp = _arr[curr_idx - curr];
+    _arr.erase(_arr.begin() + curr_idx - curr);
+    _arr.insert(_arr.begin() + target_idx - curr, temp);
+    curr++;
+  }
+}
+
+// start from 1
+size_t _sub_idx(size_t rank, size_t i) { return (rank - 1 + rank * 2 * i); };
+size_t _main_idx(size_t rank, size_t i) {
+  return (rank * 2 - 1 + rank * 2 * i);
+};
+
+void PmergeMe::merge_insert_sort(size_t rank) {
+  std::vector<unsigned int> main_seq;
+  std::vector<unsigned int> sub_seq;
+  size_t seq_len = _size / rank;
+
+  for (size_t front = rank - 1; front + rank < _size; front += 2 * rank) {
+    size_t back = front + rank;
+    if (_arr[back] < _arr[front]) {
+      _swap(front, back, rank);
+    }
+    sub_seq.push_back(_arr[front]);
+    main_seq.push_back(_arr[back]);
+  }
+  _print_all_list("test:: ", _arr);
+
+  if (seq_len >= 2) {
+    merge_insert_sort(rank * 2);
+  } else {
+    return;
+  }
+
+  // if (_size % 2) {
+  //   sub_seq.push_back(_arr[_size - 1]);
+  // }
+
+  std::vector<unsigned int> sorted_seq;  // to save sorted
+  std::vector<unsigned int> temp_seq;    // to save last of sorted
+  int j = 1;
+  sorted_seq.push_back(_arr[_sub_idx(rank, 0)]);  // sorted init ::first sub_seq
+  sorted_seq.push_back(
+      _arr[_main_idx(rank, 0)]);  // sorted init ::second sub_seq
+  seq_len = sub_seq.size();
+
+  while (_jacobstal[j] < seq_len) {
+    size_t end = 0;
+    // 해당 야곱스탈 수의 인덱스부터 다음 야곱스탈 수의 인덱스까지
+    // sorted에 미리 넣어둠
+    // end는 insert할 첫 위치로도 사용
+    for (end = _jacobstal[j];
+         end < _jacobstal[j + 1] && _size >= _main_idx(rank, end); end++) {
+      sorted_seq.push_back(_arr[_main_idx(rank, end)]);
+      if (_size <= _main_idx(rank, end)) end++;  // 홀수로 sub_seq가 남았을 때
+    }
+
+    for (size_t curr = end; curr > _jacobstal(rank, j); curr--) {
+      std::vector<unsigned int>::iterator pos =
+          std::lower_bound(sorted_seq.begin(), sorted_seq.end(),
+                           _arr[_sub_idx(rank, curr)], &comp);
+      sorted_seq.insert(pos, _arr[_sub_idx(rank, curr)]);
+      temp_seq.push_back(sorted_seq.back());
+      sorted_seq.pop_back();
+    }
+    for (std::vector<unsigned int>::iterator it = temp_seq.end();
+         it != temp_seq.begin(); --it) {
+      sorted_seq.push_back(*it);
+      temp_seq.pop_back();
+    }
+    j++;
+  }
+  for (size_t i = 0; i < sorted_seq.size(); ++i) {
+    _arr[i] = sorted_seq[i];
+  }
+}

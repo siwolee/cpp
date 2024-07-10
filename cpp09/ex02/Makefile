@@ -6,12 +6,11 @@
 #    By: haecho <haecho@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 09:06:28 by siwolee           #+#    #+#              #
-#    Updated: 2024/06/22 13:23:37 by haecho           ###   ########.fr        #
+#    Updated: 2024/07/09 19:23:25 by haecho           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ex
-
+NAME	=	PmergeMe
 FILE	=	main PmergeMe
 
 SRCSDIR = ./
