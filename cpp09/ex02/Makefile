@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME	=	PmergeMe
-FILE	=	main PmergeMe
+FILE	=	main 
 
 SRCSDIR = ./
 SRC		=  	$(addsuffix .cpp, $(FILE))

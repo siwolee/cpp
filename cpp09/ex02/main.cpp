@@ -1,8 +1,13 @@
 #include <time.h>
 
 #include <iostream>
-
+#include <sstream>
 #include "PmergeMe.hpp"
+
+#define ivec std::vector<unsigned int>
+#define ivpair std::vector<std::vector<unsigned int> >
+#define ideq std::deque<unsigned int>
+#define idpair std::deque<std::deque<unsigned int> >
 
 template <typename Container>
 void print_all_list(std::string preText, Container arr) {
@@ -18,41 +23,33 @@ int main(int ac, char **av) {
     std::cout << "try: ./Pmergeme [int1] [int2] [int3] ..." << std::endl;
     return 1;
   }
-  std::vector<unsigned int> vec(ac - 1);
-  std::deque<unsigned int> deq(ac - 1);
-  for (int i = 1; i < ac; i++) {
-    // before sorted
-    std::cout << av[i] << ", ";
-    try {
-      vec[i - 1] = std::atoi(av[i]);
-      deq[i - 1] = std::atoi(av[i]);
-    } catch (std::exception &e) {
-      std::cout << "Error: " << e.what() << std::endl;
-      return 1;
+  ivec vec;
+  ideq deq;
+  int i = 0;
+  while (++i < ac){
+    std::string str(av[i]);
+    std::stringstream ss(str);
+    unsigned int temp;
+    while (!ss.eof()) {
+      // before sorted
+      // std::cout << av[i] << ", "
+      try {
+        ss >> temp;
+        vec.push_back(temp);
+        deq.push_back(temp);
+      } catch (std::exception &e) {
+        std::cout << "Error: " << e.what() << std::endl;
+        return 1;
+      }
     }
   }
+  
+  PmergeMe<ivec, ivpair > pm_vec(vec);
+  ivec res_vec = pm_vec.run();
+  std::cout << "vector " << is_sorted(res_vec.begin(), res_vec.end()) <<std::endl;
+  PmergeMe<ideq, idpair > pm_deq(deq);
+  ideq res_deq = pm_deq.run();
+  std::cout << "deque  " << is_sorted(res_deq.begin(), res_deq.end()) <<std::endl;
 
-  // std::vector<unsigned int> v(30);
-  // std::srand(std::time(0));
-  // for (std::vector<unsigned int>::iterator iter = v.begin(); iter != v.end();
-  //      iter++) {
-  //   *iter = std::rand() % 30;
-  // }
-
-  // print_all_list("Before:", v);
-  // std::cout << "------------------sorted?" << std::endl;
-
-  // PmergeMe pmerge;
-  // std::vector<unsigned int> _res = pmerge.sorted(v);
-
-  // std::sort(v.begin(), v.end());
-  // print_all_list("_st:", v);
-  // for (unsigned int i = 0; i < v.size(); ++i) {
-  //   if (v[i] != _res[i]) {
-  //     std::cout << "failed\n";
-  //     return 1;
-  //   }
-  // }
-  // std::cout << "success\n";
   return 0;
 }
