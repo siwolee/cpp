@@ -24,7 +24,18 @@ int main() {
   print_all_list("Before:", v);
   std::cout << "------------------sorted?" << std::endl;
   // merge_insert_sort(v);
-  PmergeMe pm(v);
-  pm.merge_insert_sort(1);
-  print_all_list("After:", v);
+  // print_all_list("After:", v);
+
+  PmergeMe pmerge;
+  std::vector<unsigned int> _res = pmerge.sorted(v);
+
+  std::sort(v.begin(), v.end());
+  for (unsigned int i = 0; i < v.size(); ++i) {
+    if (v[i] != _res[i]) {
+      std::cout << "failed\n";
+      return 1;
+    }
+  }
+  std::cout << "success\n";
+  return 0;
 }

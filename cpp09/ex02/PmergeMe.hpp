@@ -1,32 +1,24 @@
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
-
 #include <algorithm>
-#include <deque>
+#include <cmath>
 #include <iostream>
-#include <iterator>
+#include <utility>
 #include <vector>
 
-// unsigned intemplate class definition
+#define ipair std::pair<unsigned int, unsigned int>
+#define iv std::vector<unsigned int>
+#define vpair std::pair<iv, iv>
+
 class PmergeMe {
  public:
-  PmergeMe(std::vector<unsigned int>& arr);
-  ~PmergeMe();
-  PmergeMe(const PmergeMe& other);
-  PmergeMe& operator=(const PmergeMe& other);
-  void merge_insert_sort(size_t rank);
+  PmergeMe() {}
+  ~PmergeMe() {}
+  std::vector<unsigned int> sorted(std::vector<unsigned int>& v);
 
  private:
-  void _swap(size_t front, size_t back, size_t size);
-  static bool comp(unsigned int a, unsigned int b);
-  static void _print_all_list(const std::string& preText,
-                              const std::vector<unsigned int>& arr);
-  static const size_t _jacobstal[33];
-
-  std::vector<unsigned int>& _arr;
-  size_t _size;
-
-  void _insert(size_t rank, size_t target_idx, size_t curr_idx);
+  unsigned int find_pair(std::vector<ipair>& pairs, unsigned int v);
+  void print_vec(std::vector<unsigned int>& v);
+  vpair set_pair(std::vector<unsigned int>& v);
+  std::vector<unsigned int> insertion(std::vector<unsigned int>& cv,
+                                      std::vector<unsigned int> sv,
+                                      unsigned int idx);
 };
-
-#endif  // PMERGEME_HPP

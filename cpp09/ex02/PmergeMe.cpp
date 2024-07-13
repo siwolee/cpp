@@ -1,123 +1,147 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(std::vector<unsigned int>& arr) : _arr(arr) {
-  _size = arr.size();
-}
+std::size_t jacob[54] = {0u,
+                         1u,
+                         3u,
+                         5u,
+                         11u,
+                         21u,
+                         43u,
+                         85u,
+                         171u,
+                         341u,
+                         683u,
+                         1365u,
+                         2731u,
+                         5461u,
+                         10923u,
+                         21845u,
+                         43691u,
+                         87381u,
+                         174763u,
+                         349525u,
+                         699051u,
+                         1398101u,
+                         2796203u,
+                         5592405u,
+                         11184811u,
+                         22369621u,
+                         44739243u,
+                         89478485u,
+                         178956971u,
+                         357913941u,
+                         715827883u,
+                         1431655765u,
+                         2863311531u,
+                         5726623061u,
+                         11453246123u,
+                         22906492245u,
+                         45812984491u,
+                         91625968981u,
+                         183251937963u,
+                         366503875925u,
+                         733007751851u,
+                         1466015503701u,
+                         2932031007403u,
+                         5864062014805u,
+                         11728124029611u,
+                         23456248059221u,
+                         46912496118443u,
+                         93824992236885u,
+                         187649984473771u,
+                         375299968947541u,
+                         750599937895083u,
+                         1501199875790165u,
+                         3002399751580331u};
 
-PmergeMe::~PmergeMe() {}
-
-PmergeMe::PmergeMe(const PmergeMe& other) : _arr(other._arr) {
-  _size = other._size;
-}
-
-PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
-  if (this != &other) {
-    _arr = other._arr;
-    _size = other._size;
-  }
-  return *this;
-}
-
-void PmergeMe::_swap(size_t front, size_t back, size_t size) {
-  while (size-- > 0) {
-    std::swap(_arr[front--], _arr[back--]);
-  }
-}
-
-bool PmergeMe::comp(unsigned int a, unsigned int b) { return a < b; }
-
-void PmergeMe::_print_all_list(const std::string& preText,
-                               const std::vector<unsigned int>& arr) {
-  std::cout << preText;
-  for (std::vector<unsigned int>::const_iterator it = arr.begin();
-       it != arr.end(); ++it) {
-    std::cout << " " << *it;
-  }
-  std::cout << std::endl;
-}
-
-const size_t PmergeMe::_jacobstal[33] = {
-    1u,          3u,         5u,        11u,        21u,        43u,
-    85u,         171u,       341u,      683u,       1365u,      2731u,
-    5461u,       10923u,     21845u,    43691u,     87381u,     174763u,
-    349525u,     699051u,    1398101u,  2796203u,   5592405u,   11184811u,
-    22369621u,   44739243u,  89478485u, 178956971u, 357913941u, 715827883u,
-    1431655765u, 2863311531u};
-
-void PmergeMe::_insert(size_t rank, size_t target_idx, size_t curr_idx) {
-  size_t curr = 0;
-  while (curr < rank) {
-    unsigned int temp = _arr[curr_idx - curr];
-    _arr.erase(_arr.begin() + curr_idx - curr);
-    _arr.insert(_arr.begin() + target_idx - curr, temp);
-    curr++;
-  }
-}
-
-// start from 1
-size_t _sub_idx(size_t rank, size_t i) { return (rank - 1 + rank * 2 * i); };
-size_t _main_idx(size_t rank, size_t i) {
-  return (rank * 2 - 1 + rank * 2 * i);
-};
-
-// size_t pos_to_idx(size_t rank, size_t pos) { return (); }
-
-void PmergeMe::merge_insert_sort(size_t rank) {
-  std::vector<unsigned int> main_seq;
-  std::vector<unsigned int> sub_seq;
-  size_t seq_len = _size / rank;
-
-  for (size_t front = rank - 1; front + rank < _size; front += 2 * rank) {
-    size_t back = front + rank;
-    if (_arr[back] < _arr[front]) {
-      _swap(front, back, rank);
+unsigned int PmergeMe::find_pair(std::vector<ipair>& pairs, unsigned int v) {
+  for (unsigned int i = 0; i < pairs.size(); ++i) {
+    if (pairs[i].second == v) {
+      return pairs[i].first;
     }
-    sub_seq.push_back(_arr[front]);
-    main_seq.push_back(_arr[back]);
   }
-  _print_all_list("test:: ", _arr);
+  return v;
+}
 
-  if (seq_len >= 2) {
-    merge_insert_sort(rank * 2);
-  } else {
-    return;
+void PmergeMe::print_vec(std::vector<unsigned int>& v) {
+  for (unsigned int i = 0; i < v.size(); ++i) {
+    std::cout << v[i] << " ";
   }
+  std::cout << "\n";
+}
 
-  // if (_size % 2) {
-  //   sub_seq.push_back(_arr[_size - 1]);
-  // }
-
-  std::vector<unsigned int> sorted_seq;  // to save sorted
-
-  int j = 1;
-  size_t compareSize = 4;
-  sorted_seq.push_back(sub_seq[0]);   // sorted init ::first sub_seq
-  sorted_seq.push_back(main_seq[0]);  // sorted init ::second sub_seq
-  seq_len = sub_seq.size();
-
-  while (_jacobstal[j] < seq_len) {
-    size_t end = 0;
-    // 해당 야곱스탈 수의 인덱스부터 다음 야곱스탈 수의 인덱스까지
-    // sorted에 미리 넣어둠
-    // end는 insert할 첫 위치로도 사용
-    for (end = _jacobstal[j];
-         end < _jacobstal[j + 1] && _size >= main_seq.size(); end++) {
-      sorted_seq.push_back(main_seq[end - 1]);
+vpair PmergeMe::set_pair(std::vector<unsigned int>& v) {
+  unsigned int mid = v.size() / 2;
+  std::vector<unsigned int> lv(mid);
+  std::vector<unsigned int> sv(mid);
+  for (unsigned int i = 0; i < mid; i++) {
+    lv[i] = v[i];
+    sv[i] = v[i + mid];
+    if (lv[i] < sv[i]) {
+      std::swap(lv[i], sv[i]);
     }
-
-    if (end < sub_seq.size()) end++;  // 홀수로 sub_seq가 남았을 때
-
-    // 다음 야곱스탈 수 or sub_seq의 끝에서부터 idx를 줄이며 sorted에 insert
-    for (size_t curr = end; curr > _jacobstal[j]; curr--) {
-      std::vector<unsigned int>::iterator pos = std::lower_bound(
-          sorted_seq.begin(), sorted_seq.begin() + (compareSize - 2),
-          sub_seq[curr]);
-      size_t dist = std::distance(sorted_seq.begin(), pos);
-      sorted_seq.insert(pos, sub_seq[curr]);
-      // 실제 _arr에 반영
-      _insert(rank, dist * rank, curr * rank);
-    }
-    j++;
-    compareSize *= 2;
   }
+  return std::make_pair(lv, sv);
+}
+
+std::vector<unsigned int> PmergeMe::insertion(std::vector<unsigned int>& cv,
+                                              std::vector<unsigned int> sv,
+                                              unsigned int idx) {
+  if (jacob[idx - 1] >= cv.size()) {
+    return cv;
+  }
+  std::size_t start = sv.size() > jacob[idx] ? jacob[idx] : sv.size();
+  if (idx == 1) {
+    cv.insert(cv.begin(), sv[0]);
+    return insertion(cv, sv, idx + 1);
+  }
+  std::cout << "std::pow(2, idx) - 1 : " << std::pow(2, idx) - 1 << ", ";
+  size_t end =
+      std::pow(2, idx) - 1 > cv.size() ? cv.size() : std::pow(2, idx) - 1;
+  for (std::size_t i = start - 1; i >= jacob[idx - 1]; --i) {
+    cv.insert(std::lower_bound(cv.begin(), cv.begin() + end, sv[i]), sv[i]);
+    if (i == 0) {
+      break;
+    }
+  }
+  std::cout << "\n";
+  return insertion(cv, sv, idx + 1);
+}
+
+std::vector<unsigned int> PmergeMe::sorted(std::vector<unsigned int>& v) {
+  unsigned int mid = v.size() / 2;
+  std::vector<unsigned int> _cv;
+  std::vector<unsigned int> lv(mid);
+  std::vector<unsigned int> sv(mid);
+  std::vector<ipair> pair_vector;
+  unsigned int odd;
+  if (v.size() % 2) {
+    odd = v[v.size() - 1];
+  }
+  if (v.size() < 2) {
+    _cv.push_back(v[0]);
+    return _cv;
+  }
+  for (unsigned int i = 0; i < mid; i++) {
+    lv[i] = v[i];
+    sv[i] = v[i + mid];
+    if (lv[i] < sv[i]) {
+      std::swap(lv[i], sv[i]);
+    }
+    pair_vector.push_back(std::make_pair(sv[i], lv[i]));
+  }
+  _cv = sorted(lv);
+  std::vector<unsigned int> _sv(sv.size());
+  for (unsigned int i = 0; i < _sv.size(); ++i) {
+    _sv[i] = find_pair(pair_vector, _cv[i]);
+  }
+  if (v.size() % 2) {
+    _sv.push_back(odd);
+  }
+  std::cout << "_sv: ";
+  print_vec(_sv);
+  insertion(_cv, _sv, 1);
+  std::cout << "_cv: ";
+  print_vec(_cv);
+  return _cv;
 }
