@@ -1,18 +1,16 @@
 #include <algorithm>
 #include <cmath>
+#include <deque>
 #include <iostream>
 #include <utility>
 #include <vector>
 
-#define ipair std::pair<unsigned int, unsigned int>
-#define iv std::vector<unsigned int>
-#define vpair std::pair<iv, iv>
-
+template <typename Container>
 class PmergeMe {
  public:
   PmergeMe() {}
   ~PmergeMe() {}
-  std::vector<unsigned int> sorted(std::vector<unsigned int>& v);
+  Container<unsigned int> merge_insert_sort(Container<unsigned int>& v);
 
  private:
   unsigned int find_pair(std::vector<ipair>& pairs, unsigned int v);
