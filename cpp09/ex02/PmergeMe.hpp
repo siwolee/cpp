@@ -6,10 +6,12 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
-#include <ctime>
+#include <time.h>
+
 
 
 bool _comp(const unsigned int &a, const unsigned int &b){ return a < b; }
+double ustime(clock_t x) { return (((double)x * 1000) / CLOCKS_PER_SEC);}
 
 template <typename C, typename CC>
 class PmergeMe {
@@ -18,7 +20,7 @@ class PmergeMe {
   ~PmergeMe();
   PmergeMe(const PmergeMe& other);
   PmergeMe& operator=(const PmergeMe& other);
-  C run();
+  C run(std::string type);
 
  private:
   void _merge_insert_sort(size_t rank);
@@ -70,8 +72,13 @@ PmergeMe<C, CC>& PmergeMe<C, CC>::operator=(const PmergeMe& other) {
 }
 
 template <typename C, typename CC>
-C PmergeMe<C, CC>::run() {
+C PmergeMe<C, CC>::run(std::string type) {
+  clock_t start = clock();
   _merge_insert_sort(1);
+  clock_t end = clock();
+    
+  std::cout << "Time to process a range of " << _size <<" elements with std::"<< type << " : " << ustime(end - start) << " us" << std::endl;
+
   return _ref;
 }
 
@@ -124,17 +131,17 @@ void PmergeMe<C, CC>::_sort(C& main, C& sub, CC & main_rest, CC& sub_rest) {
 
   main.insert(main.begin(), sub[0]);
   main_rest.insert(main_rest.begin(), sub_rest[0]);
-  std::cout <<"-----" << sub_len << "-----" <<std::endl;
+  // std::cout <<"-----" << sub_len << "-----" <<std::endl;//DEBUG
 
   while (1) {
     range = _jacobstal[j_idx + 1] + _jacobstal[j_idx] - 1;
-    if (range > main.size()) range = main.size(); //temp
+    if (range > main.size()) range = main.size(); 
     
     if (_jacobstal[j_idx + 1] > sub_len ) curr = sub_len -1; 
     else curr = _jacobstal[j_idx + 1] - 1;
     
     for (; curr >= _jacobstal[j_idx]; curr--) {
-      std::cout<< curr + 1 <<std::endl;
+      // std::cout<< curr + 1 <<std::endl; //DEBUG
       pos = std::lower_bound(main.begin(), main.begin() + range, sub[curr], _comp);
       if (std::distance(main.begin(), pos) > (long)range)  {
         main_rest.push_back(sub_rest[curr]);

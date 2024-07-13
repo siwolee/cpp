@@ -20,7 +20,7 @@ void print_all_list(std::string preText, Container arr) {
 
 int main(int ac, char **av) {
   if (ac < 2) {
-    std::cout << "try: ./Pmergeme [int1] [int2] [int3] ..." << std::endl;
+    std::cout << "try: ./PmergeMe int int int ..." << std::endl;
     return 1;
   }
   ivec vec;
@@ -30,26 +30,30 @@ int main(int ac, char **av) {
     std::string str(av[i]);
     std::stringstream ss(str);
     unsigned int temp;
+
     while (!ss.eof()) {
-      // before sorted
-      // std::cout << av[i] << ", "
       try {
         ss >> temp;
         vec.push_back(temp);
         deq.push_back(temp);
       } catch (std::exception &e) {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cout << "Error"<< std::endl;
         return 1;
       }
     }
   }
   
+  ivec sortvec = ivec(vec);
+  std::sort(sortvec.begin(), sortvec.end());
+  print_all_list("Before:", vec);
+  print_all_list("After:", sortvec);
+
   PmergeMe<ivec, ivpair > pm_vec(vec);
-  ivec res_vec = pm_vec.run();
-  std::cout << "vector " << is_sorted(res_vec.begin(), res_vec.end()) <<std::endl;
+  ivec res_vec = pm_vec.run("vector");
+  // std::cout << "vector " << is_sorted(res_vec.begin(), res_vec.end()) <<std::endl;
   PmergeMe<ideq, idpair > pm_deq(deq);
-  ideq res_deq = pm_deq.run();
-  std::cout << "deque  " << is_sorted(res_deq.begin(), res_deq.end()) <<std::endl;
+  ideq res_deq = pm_deq.run("deque ");
+  // std::cout << "deque  " << is_sorted(res_deq.begin(), res_deq.end()) <<std::endl;
 
   return 0;
 }
