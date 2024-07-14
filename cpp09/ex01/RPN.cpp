@@ -59,5 +59,8 @@ void RPN::calculate(int ac, char* av[]) {
     }
     i++;
   }
+  if (_data.size() != 1) {
+    throw std::invalid_argument("Error");
+  }
   std::cout << _data.top() << std::endl;
 }
